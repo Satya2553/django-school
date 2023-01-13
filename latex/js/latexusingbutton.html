@@ -11,14 +11,10 @@
     
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     <span id="latex-text">
-        <form action="">
-            <input type="text" name="latextxt" placeholder="enter latex text" id="latextext">
-        </form>
         <button type="button" title="Latex" onclick="convertion()">convert</button>
     </span>
     <script>
         function convertion(){
-            
             var latexText = "This is some text with a formula: \\(x_2 + y^2 = z^2\\)";
             document.getElementById("latex-text").innerHTML = latexText;
             MathJax.typeset();
