@@ -1,0 +1,70 @@
+<head>
+    <style>
+        #lt{
+            display: none;
+            position: fixed;
+            border: 3px solid #f1f1f1;
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
+        #final {
+            padding: 5px;
+            border: 3px solid black;
+        }
+        #add{
+            display: none;
+            position: fixed;
+            border: 3px solid #f1f1f1;
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
+    </style>
+<head>
+<body>
+    <h1>Conversion</h1>
+    <div id="texts">
+        {% for x in plaintexts %}
+            <p>{{x.plaintext}}  {{x.latextext}}</p>
+        {% endfor %}
+    </div>
+    <form method="post" action="{%url 'store' %}" id="f">
+        {% csrf_token %}
+        <input type="text" name="plaintext" placeholder="Enter Text" id="pt">
+        <button type="submit">ADD</button>
+        <button type="button" id="adds" onclick="openForm2()">ADD_TEXT</button>
+        <button type="button" id="conv" onclick="openForm()">ADD_LATEX</button>
+    </form>
+    <div class="form" id="add">
+        <form method="post" action="{% url 'add' %}">
+            {% csrf_token %}
+            <input type="text" name="plaintext" placeholder="Continue the text">
+            <button type="submit">submit</button>
+        </form>
+    </div>
+    <div class="form" id="lt">
+        <form method="post" action="{% url 'conv' %}">
+            {% csrf_token %}
+            <input type="text" name="latextext" placeholder="Enter Latex text">
+            <button type="submit">submit</button>
+        </form>
+    </div>
+    <form method="post" action="{% url 'final' %}">
+        {% csrf_token %}
+        <button type="submit">Publish</button>
+    </form>
+    <div id="final">
+    {% for x in plaintexts %}
+            <p>{{x.finaltext}}</p>
+        {% endfor %}
+    </div>
+    <script>
+        function openForm() {
+          document.getElementById("lt").style.display = "block";
+        }
+        function openForm2() {
+            document.getElementById("add").style.display="block";
+        }
+    </script>
+</body>
